@@ -6,11 +6,6 @@
     <title>Books</title>
 </head>
 <body>
-    <h3>Books</h3>
-    <ul id="booK-list">
-        Loading..
-    </ul>
-
     <script>
 
         const getBooks = async () => {
@@ -19,14 +14,8 @@
                 const res = await fetch("./books.json");
                 const books = await res.json();
 
-                bookListContainer.innerHTML = "";
-                books.forEach(book => {
-                    const listItem = document.createElement("li");
-                    listItem.textContent = `${book.title} — ${book.author} — ${book.publicationYear} — ${book.genres.join(", ")}`;
-                    bookListContainer.appendChild(listItem);
-                });
+                console.log(books);
             } catch (error) {
-                bookListContainer.textContent = "Unable to load books.";
                 console.error(error);
             }
         };
