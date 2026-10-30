@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+</head>
+<body>
+    <h3>Books</h3>
+    <ul id="booK-list">
+        Loading..
+    </ul>
+
+    <script>
+
+        const getBooks = async () => {
+            const bookListContainer = document.getElementById("booK-list");
+            try {
+                const res = await fetch("./books.json");
+                const books = await res.json();
+
+                bookListContainer.innerHTML = "";
+                books.forEach(book => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `${book.title} — ${book.author} — ${book.publicationYear} — ${book.genres.join(", ")}`;
+                    bookListContainer.appendChild(listItem);
+                });
+            } catch (error) {
+                bookListContainer.textContent = "Unable to load books.";
+                console.error(error);
+            }
+        };
+
+        getBooks();
+
+    </script>
+</body>
+</html>
